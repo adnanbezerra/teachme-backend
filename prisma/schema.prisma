@@ -9,3 +9,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Users {
+  id             Int     @id @default(autoincrement())
+  name           String
+  email          String  @unique
+  profilePicture String?
+  biography      String?
+  Posts          Posts[]
+  isAdmin        Boolean @default(false)
+
+  @@map("users")
+}
+
+model Posts {
+  id           Int       @id @default(autoincrement())
+  name         String
+  views        Int       @default(0)
+  likes        Int       @default(0)
+  creationDate DateTime
+  posterId     Int
+  users        Users     @relation(fields: [posterId], references: [id])
+  Chapter      Chapter[]
+  isPublished  Boolean   @default(false)
+
+  @@map("posts")
+}
+
+model Chapter {
+  id             Int       @id @default(autoincrement())
+  title          String
+  content        String
+  lastEdit       DateTime
+  subchapterToId Int
+  children       Chapter[] @relation("subchapterToId")
+  parent         Chapter?  @relation("subchapterToId", fields: [parentId], references: [id])
+  parentId       Int?      @map("chapterId")
+  posts          Posts     @relation(fields: [postsId], references: [id])
+  postsId        Int
+}
