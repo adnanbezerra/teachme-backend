@@ -19,6 +19,7 @@ model Users {
   Posts          Posts[]
   isAdmin        Boolean @default(false)
   password       String
+  nickname       String
 
   @@map("users")
 }
