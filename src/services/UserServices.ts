@@ -7,7 +7,13 @@ import jwt from 'jsonwebtoken';
 export async function createNewUser(newUser: INewUser) {
     await checkNewEmailAvailability(newUser);
 
-    const payload: INewUser = { email: newUser.email, password: bcrypt.hashSync(newUser.password, 10) }
+    const payload: INewUser = {
+        email: newUser.email,
+        password: bcrypt.hashSync(newUser.password, 10),
+        isAdmin: false,
+        name: newUser.name,
+        profilePicture: newUser.profilePicture
+    };
 
     await insertNewUserIntoDatabase(payload);
 }
@@ -25,7 +31,7 @@ export async function userLogin(login: INewUser) {
     }
 
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: EXPIRATION });
-    
+
     return token;
 }
 
@@ -38,7 +44,7 @@ async function checkNewEmailAvailability(newLogin: INewUser) {
 }
 
 async function checkIfUserExists(newLogin: INewUser) {
-    const user = await getUserByEmail(newLogin.email);   
+    const user = await getUserByEmail(newLogin.email);
 
     if (!user) throw { type: "error_wrongLogin", message: "Wrong e-mail or password!" }
 
