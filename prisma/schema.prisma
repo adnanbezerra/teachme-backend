@@ -30,21 +30,23 @@ model Posts {
   creationDate DateTime
   posterId     Int
   users        Users     @relation(fields: [posterId], references: [id])
-  Chapter      Chapter[]
+  Chapters      Chapters[]
   isPublished  Boolean   @default(false)
 
   @@map("posts")
 }
 
-model Chapter {
+model Chapters {
   id             Int       @id @default(autoincrement())
   title          String
   content        String
   lastEdit       DateTime
   subchapterToId Int
-  children       Chapter[] @relation("subchapterToId")
-  parent         Chapter?  @relation("subchapterToId", fields: [parentId], references: [id])
+  children       Chapters[] @relation("subchapterToId")
+  parent         Chapters?  @relation("subchapterToId", fields: [parentId], references: [id])
   parentId       Int?      @map("chapterId")
   posts          Posts     @relation(fields: [postsId], references: [id])
   postsId        Int
+
+  @@map("chapters")
 }
