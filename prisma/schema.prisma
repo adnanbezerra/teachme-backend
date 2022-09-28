@@ -18,34 +18,35 @@ model Users {
   biography      String?
   Posts          Posts[]
   isAdmin        Boolean @default(false)
+  password       String
 
   @@map("users")
 }
 
 model Posts {
-  id           Int       @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   name         String
-  views        Int       @default(0)
-  likes        Int       @default(0)
+  views        Int        @default(0)
+  likes        Int        @default(0)
   creationDate DateTime
   posterId     Int
-  users        Users     @relation(fields: [posterId], references: [id])
-  Chapters      Chapters[]
-  isPublished  Boolean   @default(false)
+  users        Users      @relation(fields: [posterId], references: [id])
+  Chapters     Chapters[]
+  isPublished  Boolean    @default(false)
 
   @@map("posts")
 }
 
 model Chapters {
-  id             Int       @id @default(autoincrement())
+  id             Int        @id @default(autoincrement())
   title          String
   content        String
   lastEdit       DateTime
   subchapterToId Int
   children       Chapters[] @relation("subchapterToId")
   parent         Chapters?  @relation("subchapterToId", fields: [parentId], references: [id])
-  parentId       Int?      @map("chapterId")
-  posts          Posts     @relation(fields: [postsId], references: [id])
+  parentId       Int?       @map("chapterId")
+  posts          Posts      @relation(fields: [postsId], references: [id])
   postsId        Int
 
   @@map("chapters")
