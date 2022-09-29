@@ -3,9 +3,9 @@ import {
   AppError,
   errorTypeToStatusCode,
   isAppError,
-} from "../utils/errorUtils.js";
+} from "../utils/errorUtils";
 
-export function errorHandlerMiddleware(
+export default function errorHandlerMiddleware(
   err: Error | AppError,
   req: Request,
   res: Response,

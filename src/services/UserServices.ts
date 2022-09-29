@@ -1,4 +1,4 @@
-import { INewUser } from "../types/UserTypes";
+import { EditInfo, INewUser } from "../types/UserTypes";
 import bcrypt from 'bcrypt';
 import * as userRepository from "../repositories/UserRepository";
 import { Users } from "@prisma/client";
@@ -36,6 +36,30 @@ async function userLogin(login: INewUser) {
     return token;
 }
 
+async function getUserById(id: number) {
+    const user = await userRepository.getUserById(id);
+
+    return user;
+}
+
+async function getUsersList() {
+    const users = await userRepository.getUsersList();
+
+    return users;
+};
+
+async function deleteUser(idFromRequest: number, userId: number) {
+    await checkIfIsAdminOrIsHimself(idFromRequest, userId);
+
+    await userRepository.deleteUserById(idFromRequest);
+}
+
+async function editUser(idFromRequest: number, userId: number, newInfo: EditInfo) {
+    await checkIfIsAdminOrIsHimself(idFromRequest, userId);
+
+    await userRepository.editUserById(idFromRequest, newInfo);
+}
+
 // auxiliary functions
 
 async function checkNewEmailAvailability(newLogin: INewUser) {
@@ -58,7 +82,25 @@ function verifyLoginPassword(newLogin: INewUser, userFromDatabase: Users) {
     if (!verify) throw unauthorizedError("Wrong email or password!");
 }
 
+async function checkIfIsAdminOrIsHimself(idFromRequest: number, userId: number) {
+    const userFromRequest = await userRepository.getUserById(idFromRequest);
+
+    if (userFromRequest.id !== userId) {
+        throw unauthorizedError("You must be administrator to do that!")
+    } else {
+        return;
+    }
+
+    if (!userFromRequest.isAdmin) throw unauthorizedError("You must be administrator to do that!");
+}
+
+// exports
+
 export {
     userLogin,
-    createNewUser
+    createNewUser,
+    getUserById,
+    getUsersList,
+    deleteUser,
+    editUser
 };
