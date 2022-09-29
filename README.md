@@ -54,35 +54,42 @@ POST /signin
 ```
 
 ```yml 
-GET /user/:id (autenticada)
+GET /user/:id
     - Em breve!
     - Rota para coletar informações de um usuário específico
-    # - headers: { Authorization: Bearer $token}
-    # - body: {}
-```
-
-```yml 
-PATCH /user/:id (autenticada)
-    - Em breve!
-    - Rota para editar informações de usuário
-    # - headers: { Authorization: Bearer $token}
-    # - body: {}
-```
-
-```yml 
-DELETE /user/:id (autenticada)
-    - Em breve!
-    - Rota para deletar um usuário específico do sistema. Apenas o usuário ou um administrador pode, fazer isso.
-    # - headers: { Authorization: Bearer $token }
-    # - body: {}
+    - headers: {}
+    - body: {}
 ```
 
 ```yml 
 GET /users
     - Em breve!
     - Rota para coletar as informações de todos os usuários
-    # - headers: {}
-    # - body: {}
+    - headers: {}
+    - body: {}
+```
+
+```yml 
+PUT /user/:id (autenticada)
+    - Em breve!
+    - Rota para editar informações de usuário
+    - headers: { Authorization: Bearer $token}
+    - body: {
+        name: "lorem",
+        email: "lorem@ipsum.com",
+        nickname: "lorem",
+        biography: "lorem",
+        profilePicture: "lorem",
+        password: "loremipsum"
+    }
+```
+
+```yml 
+DELETE /user/:id (autenticada)
+    - Em breve!
+    - Rota para deletar um usuário específico do sistema. Apenas o usuário ou um administrador pode, fazer isso.
+    - headers: { Authorization: Bearer $token }
+    - body: {}
 ```
 
 ***
