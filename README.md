@@ -52,7 +52,39 @@ POST /signin
     "senha": "loremipsum"
     }
 ```
-    
+
+```yml 
+GET /user/:id (autenticada)
+    - Em breve!
+    - Rota para coletar informações de um usuário específico
+    # - headers: { Authorization: Bearer $token}
+    # - body: {}
+```
+
+```yml 
+PATCH /user/:id (autenticada)
+    - Em breve!
+    - Rota para editar informações de usuário
+    # - headers: { Authorization: Bearer $token}
+    # - body: {}
+```
+
+```yml 
+DELETE /user/:id (autenticada)
+    - Em breve!
+    - Rota para deletar um usuário específico do sistema. Apenas o usuário ou um administrador pode, fazer isso.
+    # - headers: { Authorization: Bearer $token }
+    # - body: {}
+```
+
+```yml 
+GET /users
+    - Em breve!
+    - Rota para coletar as informações de todos os usuários
+    # - headers: {}
+    # - body: {}
+```
+
 ***
 
 ## 🏁 Rodando a aplicação
@@ -77,3 +109,5 @@ Agora, voc pode finalmente rodar o seu servidor localmente usando esse comando:
 ```
 npm start
 ```
+
+:stop_sign: Não esqueça de repetir os passos acima com o [repositório](https://github.com/luanalessa/teachme-front.git) que contem a interface da aplicação, para testar o projeto por completo.
