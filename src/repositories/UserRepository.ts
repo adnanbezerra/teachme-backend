@@ -8,3 +8,7 @@ export async function insertNewUserIntoDatabase(newUser: INewUser) {
 export async function getUserByEmail(queryEmail: string) {
     return client.users.findFirst({ where: { email: queryEmail } });
 }
+
+export async function getUserByNickname(queryName: string) {
+    return client.users.findFirst({ where: { nickname: queryName } });
+}

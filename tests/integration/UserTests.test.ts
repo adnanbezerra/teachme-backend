@@ -4,13 +4,8 @@ import { client } from "../../src/database/prisma"
 import { createUser } from "../factories/UserFactory";
 
 beforeEach(async () => {
-    await client.$executeRaw`TRUNCATE TABLE "Users"`;
-
-    const createAccount = createUser()
-    await supertest(server).post('/signup').send(createAccount);
+    await client.$executeRaw`TRUNCATE TABLE "users"`;
 })
-
-jest.setTimeout(10000);
 
 describe("UserRouter tests", () => {   
 

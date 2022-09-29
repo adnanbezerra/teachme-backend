@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { getUserByEmail, insertNewUserIntoDatabase } from "../repositories/UserRepository";
 import { Users } from "@prisma/client";
 import jwt from 'jsonwebtoken';
+import { conflictError, unauthorizedError } from "../utils/errorUtils";
 
 export async function createNewUser(newUser: INewUser) {
     await checkNewEmailAvailability(newUser);
@@ -12,7 +13,7 @@ export async function createNewUser(newUser: INewUser) {
         password: bcrypt.hashSync(newUser.password, 10),
         isAdmin: false,
         name: newUser.name,
-        profilePicture: newUser.profilePicture
+        nickname: newUser.nickname
     };
 
     await insertNewUserIntoDatabase(payload);
@@ -40,13 +41,13 @@ export async function userLogin(login: INewUser) {
 async function checkNewEmailAvailability(newLogin: INewUser) {
     const user = await getUserByEmail(newLogin.email);
 
-    if (user) throw { type: "error_user_inUse", message: "This e-mail is already in use!" }
+    if (user) throw conflictError("Email already in use!");
 }
 
 async function checkIfUserExists(newLogin: INewUser) {
     const user = await getUserByEmail(newLogin.email);
 
-    if (!user) throw { type: "error_wrongLogin", message: "Wrong e-mail or password!" }
+    if (!user) throw unauthorizedError("Wrong email or password!");
 
     return user;
 }
@@ -54,5 +55,5 @@ async function checkIfUserExists(newLogin: INewUser) {
 function verifyLoginPassword(newLogin: INewUser, userFromDatabase: Users) {
     const verify = bcrypt.compareSync(newLogin.password, userFromDatabase.password);
 
-    if (!verify) throw { type: "error_wrongLogin", message: "Wrong e-mail or password!" }
+    if (!verify) throw unauthorizedError("Wrong email or password!");
 }
