@@ -1,11 +1,11 @@
 import { INewUser } from "../types/UserTypes";
 import bcrypt from 'bcrypt';
-import { getUserByEmail, insertNewUserIntoDatabase } from "../repositories/UserRepository";
+import * as userRepository from "../repositories/UserRepository";
 import { Users } from "@prisma/client";
 import jwt from 'jsonwebtoken';
 import { conflictError, unauthorizedError } from "../utils/errorUtils";
 
-export async function createNewUser(newUser: INewUser) {
+async function createNewUser(newUser: INewUser) {
     await checkNewEmailAvailability(newUser);
 
     const payload: INewUser = {
@@ -16,14 +16,14 @@ export async function createNewUser(newUser: INewUser) {
         nickname: newUser.nickname
     };
 
-    await insertNewUserIntoDatabase(payload);
+    await userRepository.createNewUser(payload);
 }
 
-export async function userLogin(login: INewUser) {
+async function userLogin(login: INewUser) {
     const SECRET_KEY = process.env.JWT_SECRET;
     const EXPIRATION = process.env.TOKEN_EXPIRES_IN;
 
-    const user = await checkIfUserExists(login);
+    const user = await getUserFromDatabase(login);
     verifyLoginPassword(login, user);
 
     const payload = {
@@ -39,13 +39,13 @@ export async function userLogin(login: INewUser) {
 // auxiliary functions
 
 async function checkNewEmailAvailability(newLogin: INewUser) {
-    const user = await getUserByEmail(newLogin.email);
+    const user = await userRepository.getUserByEmail(newLogin.email);
 
     if (user) throw conflictError("Email already in use!");
 }
 
-async function checkIfUserExists(newLogin: INewUser) {
-    const user = await getUserByEmail(newLogin.email);
+async function getUserFromDatabase(newLogin: INewUser) {
+    const user = await userRepository.getUserByEmail(newLogin.email);
 
     if (!user) throw unauthorizedError("Wrong email or password!");
 
@@ -57,3 +57,8 @@ function verifyLoginPassword(newLogin: INewUser, userFromDatabase: Users) {
 
     if (!verify) throw unauthorizedError("Wrong email or password!");
 }
+
+export {
+    userLogin,
+    createNewUser
+};

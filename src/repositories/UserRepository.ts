@@ -1,14 +1,20 @@
 import { client } from "../database/prisma";
 import { INewUser } from "../types/UserTypes";
 
-export async function insertNewUserIntoDatabase(newUser: INewUser) {
+async function createNewUser(newUser: INewUser) {
     return client.users.create({ data: newUser });
 }
 
-export async function getUserByEmail(queryEmail: string) {
+async function getUserByEmail(queryEmail: string) {
     return client.users.findFirst({ where: { email: queryEmail } });
 }
 
-export async function getUserByNickname(queryName: string) {
+async function getUserByNickname(queryName: string) {
     return client.users.findFirst({ where: { nickname: queryName } });
+}
+
+export {
+    createNewUser,
+    getUserByEmail,
+    getUserByNickname
 }
