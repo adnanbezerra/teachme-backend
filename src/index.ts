@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import errorHandler from './middlewares/ErrorHandler';
 import { UserRouter } from './routes/UserRouter';
+import { PostRouter } from './routes/PostRouter';
 dotenv.config()
 
 const server = express();
@@ -12,6 +13,7 @@ server.use(express.json());
 
 // routes
 server.use(UserRouter);
-server.use(errorHandler)
+server.use(PostRouter);
+server.use(errorHandler);
 
 export default server;
