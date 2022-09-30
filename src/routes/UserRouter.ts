@@ -2,7 +2,7 @@ import { Router } from "express";
 import { deleteUserById, getUserById, getUsersList, postSignin, postSignup, putUserById } from "../controllers/UserController";
 import { validateSchema } from "../middlewares/ValidateSchema";
 import { ValidateToken } from "../middlewares/ValidateToken";
-import { EditPostSchema } from "../schemas/EditPostSchema";
+import { EditPostSchema } from "../schemas/EditUserSchema";
 import { SigninSchema } from "../schemas/SigninSchema";
 import { SignupSchema } from "../schemas/SignupSchema";
 
