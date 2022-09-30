@@ -4,6 +4,7 @@ import * as userRepository from "../repositories/UserRepository";
 import { Users } from "@prisma/client";
 import jwt from 'jsonwebtoken';
 import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtils";
+import { checkIfIsAdminOrIsHimself } from "../utils/checkAdminOrItself";
 
 async function createNewUser(newUser: INewUser) {
     await checkNewEmailAvailability(newUser);
@@ -81,21 +82,6 @@ function verifyLoginPassword(newLogin: INewUser, userFromDatabase: Users) {
     const verify = bcrypt.compareSync(newLogin.password, userFromDatabase.password);
 
     if (!verify) throw unauthorizedError("Wrong email or password!");
-}
-
-async function checkIfIsAdminOrIsHimself(idFromRequest: number, userId: number) {
-    const userFromRequest = await userRepository.getUserById(idFromRequest);
-    if (!userFromRequest) throw notFoundError();
-
-    if (userFromRequest.id !== userId) {
-        throw unauthorizedError("You must be administrator to do that!")
-    } else {
-        return;
-    }
-
-    if (!userFromRequest.isAdmin) {
-        throw unauthorizedError("You must be administrator to do that!");
-    }
 }
 
 // exports
