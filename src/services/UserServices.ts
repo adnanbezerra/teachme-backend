@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import * as userRepository from "../repositories/UserRepository";
 import { Users } from "@prisma/client";
 import jwt from 'jsonwebtoken';
-import { conflictError, unauthorizedError } from "../utils/errorUtils";
+import { conflictError, notFoundError, unauthorizedError } from "../utils/errorUtils";
 
 async function createNewUser(newUser: INewUser) {
     await checkNewEmailAvailability(newUser);
@@ -38,6 +38,7 @@ async function userLogin(login: INewUser) {
 
 async function getUserById(id: number) {
     const user = await userRepository.getUserById(id);
+    if (!user) throw notFoundError();
 
     return user;
 }
@@ -84,6 +85,7 @@ function verifyLoginPassword(newLogin: INewUser, userFromDatabase: Users) {
 
 async function checkIfIsAdminOrIsHimself(idFromRequest: number, userId: number) {
     const userFromRequest = await userRepository.getUserById(idFromRequest);
+    if (!userFromRequest) throw notFoundError();
 
     if (userFromRequest.id !== userId) {
         throw unauthorizedError("You must be administrator to do that!")
@@ -91,7 +93,9 @@ async function checkIfIsAdminOrIsHimself(idFromRequest: number, userId: number) 
         return;
     }
 
-    if (!userFromRequest.isAdmin) throw unauthorizedError("You must be administrator to do that!");
+    if (!userFromRequest.isAdmin) {
+        throw unauthorizedError("You must be administrator to do that!");
+    }
 }
 
 // exports
