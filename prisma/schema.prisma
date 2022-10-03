@@ -43,10 +43,6 @@ model Chapters {
   title          String
   content        String
   lastEdit       DateTime
-  subchapterToId Int
-  children       Chapters[] @relation("subchapterToId")
-  parent         Chapters?  @relation("subchapterToId", fields: [parentId], references: [id])
-  parentId       Int?       @map("chapterId")
   posts          Posts      @relation(fields: [postsId], references: [id])
   postsId        Int
 
