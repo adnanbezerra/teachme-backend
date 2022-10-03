@@ -10,11 +10,11 @@ async function deletePostById(postId: number) {
 }
 
 async function getPosts() {
-    return client.posts.findMany();
+    return client.posts.findMany({ where: { isPublished: true } });
 }
 
 async function getPostById(postId: number) {
-    return client.posts.findFirst({ where: { id: postId } });
+    return client.posts.findFirst({ where: { id: postId, isPublished: true } });
 }
 
 async function getPostsOrderedByViews() {
@@ -22,6 +22,9 @@ async function getPostsOrderedByViews() {
         orderBy: {
             likes: 'desc',
             views: 'desc'
+        },
+        where: {
+            isPublished: true
         }
     })
 }

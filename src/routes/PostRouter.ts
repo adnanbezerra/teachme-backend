@@ -17,5 +17,5 @@ PostRouter.post("/like-post/:postId", ValidateToken, likePost);
 // non authenticated routes
 PostRouter.post("/view-post/:postId", viewPost);
 PostRouter.get("/posts", getPostsList);
-PostRouter.get("/post/:id", getPostById);
+PostRouter.get("/post/:postId", getPostById);
 PostRouter.get("/top-posts", getTopPosts);
