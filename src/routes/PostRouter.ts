@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createNewPost, deletePostById, editPostById, getPostById, getPostsList, getTopPosts, likePost, publishPost, viewPost } from "../controllers/PostsController";
 import { validateSchema } from "../middlewares/ValidateSchema";
 import { ValidateToken } from "../middlewares/ValidateToken";
-import { EditPostSchema } from "../schemas/EditUserSchema";
+import { EditPostSchema } from "../schemas/EditPostSchema";
 import { NewPostSchema } from "../schemas/NewPostSchema";
 
 export const PostRouter = Router();

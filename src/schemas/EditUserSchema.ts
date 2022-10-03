@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const EditPostSchema = Joi.object({
+export const EditUserSchema = Joi.object({
     email: Joi.string().email(),
     name: Joi.string().trim().required(),
     nickname: Joi.string().trim().required(),
