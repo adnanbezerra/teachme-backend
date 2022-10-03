@@ -55,7 +55,6 @@ POST /signin
 
 ```yml 
 GET /user/:id
-    - Em breve!
     - Rota para coletar informações de um usuário específico
     - headers: {}
     - body: {}
@@ -63,7 +62,6 @@ GET /user/:id
 
 ```yml 
 GET /users
-    - Em breve!
     - Rota para coletar as informações de todos os usuários
     - headers: {}
     - body: {}
@@ -71,7 +69,6 @@ GET /users
 
 ```yml 
 PUT /user/:id (autenticada)
-    - Em breve!
     - Rota para editar informações de usuário
     - headers: { Authorization: Bearer $token}
     - body: {
@@ -86,11 +83,83 @@ PUT /user/:id (autenticada)
 
 ```yml 
 DELETE /user/:id (autenticada)
-    - Em breve!
-    - Rota para deletar um usuário específico do sistema. Apenas o usuário ou um administrador pode, fazer isso.
+    - Rota para deletar um usuário específico do sistema. Apenas 
+    o usuário ou um administrador podem fazer isso.
     - headers: { Authorization: Bearer $token }
     - body: {}
 ```
+
+```yml 
+POST /new-post/:id (autenticada)
+    - Rota para criar uma nova postagem
+    - headers: { Authorization: Bearer $token }
+    - body: {
+        name: "lorem",
+        creationDate: "DD/MM/YYYY"
+    }
+```
+
+```yml
+DELETE /post/:postId (autenticada)
+    - Rota para deleter um post. Só pode ser feito por um 
+    admin ou pelo usuário que criou o post
+    - headers: { Authorization: Bearer $token }
+    - body: {}
+```
+
+```yml
+PUT /post/:postId (autenticada)
+    - Rota para editar um post. Só pode ser feito por um 
+    admin ou pelo usuário que criou o post
+    - headers: { Authorization: Bearer $token }
+    - body: {
+        name: "lorem"
+    }
+```
+
+```yml
+POST /publish-post/:postId (autenticada)
+    - Rota para fazer um post deixar de ser rascunho e torná-lo público.
+    Só pode ser feito por um admin ou pelo usuário que criou o post
+    - headers: { Authorization: Bearer $token }
+    - body: {}
+```
+
+```yml
+POST /like-post/:postId (autenticada)
+    - Rota para curtir um post. Pode ser feita por qualquer usuário logado.
+    - headers: { Authorization: Bearer $token }
+    - body: {}
+```
+
+```yml
+POST /view-post/:postId
+    - Rota para registrar uma visualização em um post
+    - headers: {}
+    - body: {}
+```
+
+```yml
+GET /posts
+    - Rota para receber a lista dos posts publicados
+    - headers: {}
+    - body: {}
+```
+
+```yml
+GET /post/:postId
+    - Rota para receber um post por id, se ele tiver sido publicado
+    - headers: {}
+    - body: {}
+```
+
+```yml
+GET /top-posts
+    - Rota para receber os posts mais vistos
+    - headers: {}
+    - body: {}
+```
+
 
 ***
 
