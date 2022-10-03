@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import * as postsService from "../services/PostsServices"
-import { NewPostInfo } from "../types/PostsTypes";
+import { NewPost, NewPostInfo } from "../types/PostsTypes";
 
 async function createNewPost(req: Request, res: Response) {
     const userId = +res.locals.userId;
-    const newPostInfo: NewPostInfo = req.body;
+    const newPostInfo: NewPost = req.body;
 
     await postsService.createNewPost(newPostInfo, userId);
 }

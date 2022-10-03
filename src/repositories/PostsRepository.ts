@@ -30,9 +30,7 @@ async function editPostById(postId: number, newPostInfo: NewPostInfo) {
     return client.posts.update({
         where: { id: postId },
         data: {
-            name: newPostInfo.name,
-            posterId: newPostInfo.posterId,
-            creationDate: newPostInfo.creationDate
+            name: newPostInfo.name
         }
     });
 }
