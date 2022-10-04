@@ -160,6 +160,41 @@ GET /top-posts
     - body: {}
 ```
 
+```yml
+POST /new-chapter/:postId (autenticada)
+    - Rota para criar um novo capítulo atrelado ao id de um post
+    - headers: { Authorization: Bearer $token }
+    - body: {
+        title: "lorem",
+        content: "ipsum",
+        lastEdit: date
+    }
+```
+
+```yml
+PUT /edit-chapter/:chapterId (autenticada)
+    - Rota para editar as informações de um capítulo
+    - headers: { Authorization: Bearer $token }
+    - body: {
+        title: "lorem",
+        content: "ipsum",
+        lastEdit: date
+    }
+```
+
+```yml
+DELETE /delete-chapter/:chapterId (autenticada)
+    - Rota para deletar um capítulo. Só pode ser feito pelo usuário ou por um admin
+    - headers: { Authorization: Bearer $token }
+    - body: {}
+```
+
+```yml
+GET /chapters/:postId
+    - Rota para retornar os capítulos de um post pelo ID do post
+    - headers: {}
+    - body: {}
+```
 
 ***
 
