@@ -35,12 +35,13 @@ Nota-se que, embora existam diversas plataformas desse tipo, nenhuma é exclusiv
 POST /signup
     - Rota para cadastrar um novo usuário
     - headers: {}
-    - body:{
-        "name": "Lorem ipsum",
-        "nickname": "loremipsum",
-        "email": "lorem@gmail.com",
-        "senha": "loremipsum"
-}
+    - body: {
+        name: "Lorem ipsum",
+        nickname: "loremipsum",
+        email: "lorem@gmail.com",
+        profilePicture: "https://loremipsum.com" (nullable),
+        password: "loremipsum"
+    }
 ```
     
 ```yml 
@@ -48,8 +49,8 @@ POST /signin
     - Rota para fazer login
     - headers: {}
     - body: {
-    "email": "lorem@gmail.com",
-    "senha": "loremipsum"
+    email: "lorem@gmail.com",
+    password: "loremipsum"
     }
 ```
 
@@ -216,7 +217,7 @@ npm install
 
 Agora, você preisa configurar o arquivo `.env`. Você deve copiar o que estiver dentro de `.env.example`, criar um arquivo `.env`, colar as informações copiadas e preencher as variáveis necessária.
 
-Agora, voc pode finalmente rodar o seu servidor localmente usando esse comando:
+Agora, você pode finalmente rodar o seu servidor localmente usando esse comando:
 ```
 npm start
 ```
