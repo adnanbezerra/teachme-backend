@@ -27,6 +27,7 @@ model Users {
 model Posts {
   id           Int        @id @default(autoincrement())
   name         String
+  description  String
   views        Int        @default(0)
   likes        Int        @default(0)
   creationDate DateTime
@@ -39,12 +40,12 @@ model Posts {
 }
 
 model Chapters {
-  id             Int        @id @default(autoincrement())
-  title          String
-  content        String
-  lastEdit       DateTime
-  posts          Posts      @relation(fields: [postsId], references: [id])
-  postsId        Int
+  id       Int      @id @default(autoincrement())
+  title    String
+  content  String
+  lastEdit DateTime
+  posts    Posts    @relation(fields: [postsId], references: [id])
+  postsId  Int
 
   @@map("chapters")
 }
