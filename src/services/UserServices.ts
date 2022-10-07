@@ -13,8 +13,8 @@ async function createNewUser(newUser: INewUser) {
         email: newUser.email,
         password: bcrypt.hashSync(newUser.password, 10),
         isAdmin: false,
-        name: newUser.name,
-        nickname: newUser.nickname
+        profilePicture: newUser.profilePicture,
+        name: newUser.name
     };
 
     await userRepository.createNewUser(payload);
