@@ -17,6 +17,15 @@ async function getPostById(postId: number) {
     return client.posts.findFirst({ where: { id: postId, isPublished: true } });
 }
 
+async function getPostByName(postName: string) {
+    return client.$executeRaw`
+        SELECT id, name, description, "creationDate", views, likes
+        FROM posts
+        WHERE name ILIKE %${postName}%
+        AND "isPublished"=true
+    `
+}
+
 async function getPostsOrderedByViews() {
     return client.posts.findMany({
         orderBy: {
@@ -74,6 +83,7 @@ export {
     deletePostById,
     getPosts,
     getPostById,
+    getPostByName,
     getPostsOrderedByViews,
     editPostById,
     publishPost,

@@ -38,6 +38,14 @@ async function getTopPosts(req: Request, res: Response) {
     res.send(posts).status(200);
 }
 
+async function getPostsByName(req: Request, res: Response) {
+    const name = req.params.name;
+
+    const posts = await postsService.getPostByName(name);
+
+    res.send(posts).status(200);
+}
+
 async function editPostById(req: Request, res: Response) {
     const newInfo: NewPostInfo = req.body;
     const postId = +req.params.postId;
@@ -79,6 +87,7 @@ export {
     getPostsList,
     getPostById,
     getTopPosts,
+    getPostsByName,
     editPostById,
     publishPost,
     likePost,

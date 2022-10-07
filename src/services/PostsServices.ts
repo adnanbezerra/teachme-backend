@@ -35,6 +35,13 @@ async function getPostsOrderedByViews() {
     return posts;
 }
 
+async function getPostByName(name: string) {
+    const posts = await postsRepository.getPostByName(name);
+    if (!posts) throw notFoundError();
+
+    return posts;
+}
+
 async function editPostById(postId: number, newPostInfo: NewPostInfo, userId: number) {
     const post = await getPostFromRepository(postId);
 
@@ -78,6 +85,7 @@ export {
     getPosts,
     getPostById,
     getPostsOrderedByViews,
+    getPostByName,
     editPostById,
     publishPost,
     viewPost,
