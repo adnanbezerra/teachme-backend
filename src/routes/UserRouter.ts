@@ -10,8 +10,8 @@ export const UserRouter = Router();
 
 UserRouter.post("/signin", validateSchema(SigninSchema), postSignin);
 UserRouter.post("/signup", validateSchema(SignupSchema), postSignup);
-UserRouter.get("/user/:id", getUserById);
+UserRouter.get("/user/id/:id", getUserById);
 UserRouter.get("/users", getUsersList);
-UserRouter.put("/user/:id", validateSchema(EditUserSchema), ValidateToken, putUserById);
-UserRouter.delete("/user/:id", ValidateToken, deleteUserById);
+UserRouter.put("/user/id/:id", validateSchema(EditUserSchema), ValidateToken, putUserById);
+UserRouter.delete("/user/id/:id", ValidateToken, deleteUserById);
 UserRouter.get("/user/me", ValidateToken, );
