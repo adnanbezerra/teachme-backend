@@ -7,6 +7,8 @@ async function createNewPost(req: Request, res: Response) {
     const newPostInfo: NewPost = req.body;
 
     await postsService.createNewPost(newPostInfo, userId);
+
+    return res.sendStatus(201);
 }
 
 async function deletePostById(req: Request, res: Response) {
