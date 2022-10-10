@@ -18,6 +18,6 @@ PostRouter.get("/my-posts", ValidateToken, getMyPosts);
 // non authenticated routes
 PostRouter.post("/view-post/:postId", viewPost);
 PostRouter.get("/posts", getPostsList);
-PostRouter.get("/post/:postId", getPostById);
+PostRouter.get("/post/id/:postId", getPostById);
 PostRouter.get("/top-posts", getTopPosts);
-PostRouter.get("/post/:name", getPostsByName);
+PostRouter.get("/post/name/:name", getPostsByName);
