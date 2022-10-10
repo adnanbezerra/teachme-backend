@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createNewPost, deletePostById, editPostById, getPostById, getPostsByName, getPostsList, getTopPosts, likePost, publishPost, viewPost } from "../controllers/PostsController";
+import { createNewPost, deletePostById, editPostById, getMyPosts, getPostById, getPostsByName, getPostsList, getTopPosts, likePost, publishPost, viewPost } from "../controllers/PostsController";
 import { validateSchema } from "../middlewares/ValidateSchema";
 import { ValidateToken } from "../middlewares/ValidateToken";
 import { EditPostSchema } from "../schemas/EditPostSchema";
@@ -20,4 +20,4 @@ PostRouter.get("/posts", getPostsList);
 PostRouter.get("/post/:postId", getPostById);
 PostRouter.get("/top-posts", getTopPosts);
 PostRouter.get("/post/:name", getPostsByName);
-PostRouter.get("/my-posts");
+PostRouter.get("/my-posts", getMyPosts);

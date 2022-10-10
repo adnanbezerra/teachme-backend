@@ -99,5 +99,6 @@ export {
     editPostById,
     publishPost,
     likePost,
-    viewPost
+    viewPost,
+    getMyPosts
 }
