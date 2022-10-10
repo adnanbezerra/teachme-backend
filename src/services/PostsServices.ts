@@ -70,6 +70,13 @@ async function likePost(postId: number) {
     await postsRepository.publishPost(postId);
 }
 
+async function getMyPosts(userId: number) {
+    const posts = await postsRepository.getMyPosts(userId);
+    if(!posts) throw notFoundError();
+
+    return posts;
+}
+
 // support functions
 
 async function getPostFromRepository(postId: number) {
@@ -89,5 +96,6 @@ export {
     editPostById,
     publishPost,
     viewPost,
-    likePost
+    likePost,
+    getMyPosts
 }

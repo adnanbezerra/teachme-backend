@@ -20,3 +20,4 @@ PostRouter.get("/posts", getPostsList);
 PostRouter.get("/post/:postId", getPostById);
 PostRouter.get("/top-posts", getTopPosts);
 PostRouter.get("/post/:name", getPostsByName);
+PostRouter.get("/my-posts");

@@ -78,6 +78,12 @@ async function likePost(postId: number) {
     })
 }
 
+async function getMyPosts(userId: number) {
+    return client.posts.findMany({
+        where: { posterId: userId }
+    })
+};
+
 export {
     createNewPost,
     deletePostById,
@@ -88,5 +94,6 @@ export {
     editPostById,
     publishPost,
     viewPost,
-    likePost
+    likePost,
+    getMyPosts
 }

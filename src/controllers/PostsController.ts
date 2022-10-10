@@ -81,6 +81,14 @@ async function viewPost(req: Request, res: Response) {
     res.sendStatus(200);
 }
 
+async function getMyPosts(req: Request, res: Response) {
+    const userId = +res.locals.userId;
+
+    const posts = await postsService.getMyPosts(userId);
+
+    res.status(200).send(posts);
+}
+
 export {
     createNewPost,
     deletePostById,
