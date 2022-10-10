@@ -13,6 +13,7 @@ PostRouter.delete("/post/:postId", ValidateToken, deletePostById);
 PostRouter.put("/post/:postId", validateSchema(EditPostSchema), ValidateToken, editPostById);
 PostRouter.post("/publish-post/:postId", ValidateToken, publishPost);
 PostRouter.post("/like-post/:postId", ValidateToken, likePost);
+PostRouter.get("/my-posts", ValidateToken, getMyPosts);
 
 // non authenticated routes
 PostRouter.post("/view-post/:postId", viewPost);
@@ -20,4 +21,3 @@ PostRouter.get("/posts", getPostsList);
 PostRouter.get("/post/:postId", getPostById);
 PostRouter.get("/top-posts", getTopPosts);
 PostRouter.get("/post/:name", getPostsByName);
-PostRouter.get("/my-posts", getMyPosts);
