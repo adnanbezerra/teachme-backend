@@ -18,12 +18,12 @@ async function getPostById(postId: number) {
 }
 
 async function getPostByName(postName: string) {
-    return client.$executeRaw`
-        SELECT id, name, description, "creationDate", views, likes
+    return client.$executeRawUnsafe(
+        `SELECT id, name, description, "creationDate", views, likes
         FROM posts
-        WHERE name ILIKE %${postName}%
-        AND "isPublished"=true
-    `
+        WHERE name ILIKE $1
+        AND "isPublished"=true`, [`%${postName}%`]
+    )
 }
 
 async function getPostsOrderedByViews() {
