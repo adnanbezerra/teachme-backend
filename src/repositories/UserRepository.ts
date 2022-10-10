@@ -11,12 +11,11 @@ async function getUserByEmail(queryEmail: string) {
 
 async function getUserByNickname(queryName: string) {
     return client.users.findFirst({
-        where: { nickname: queryName },
+        where: { name: queryName },
         select: {
             id: true,
             name: true,
             email: true,
-            nickname: true,
             biography: true,
             profilePicture: true,
             isAdmin: true
@@ -31,7 +30,6 @@ async function getUserById(queryId: number) {
             id: true,
             name: true,
             email: true,
-            nickname: true,
             biography: true,
             profilePicture: true,
             isAdmin: true
@@ -45,7 +43,6 @@ async function getUsersList() {
             id: true,
             name: true,
             email: true,
-            nickname: true,
             biography: true,
             profilePicture: true,
             isAdmin: true
@@ -63,9 +60,22 @@ async function editUserById(queryId: number, newInfo: EditInfo) {
         data: {
             name: newInfo.name,
             email: newInfo.email,
-            nickname: newInfo.nickname,
             biography: newInfo.biography,
             profilePicture: newInfo.profilePicture
+        }
+    })
+}
+
+async function getUserMe(userId: number) {
+    return client.users.findFirst({
+        where: { id: userId },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            biography: true,
+            profilePicture: true,
+            isAdmin: true
         }
     })
 }
@@ -77,5 +87,6 @@ export {
     getUserById,
     getUsersList,
     deleteUserById,
-    editUserById
+    editUserById,
+    getUserMe
 }

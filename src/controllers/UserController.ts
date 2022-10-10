@@ -48,3 +48,11 @@ export async function deleteUserById(req: Request, res: Response) {
 
     res.sendStatus(200);
 }
+
+export async function getUserMe(req: Request, res: Response) {
+    const userId = +res.locals.id;
+
+    const user = await userService.getUserMe(userId);
+
+    res.status(200).send(user);
+}

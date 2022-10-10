@@ -14,3 +14,4 @@ UserRouter.get("/user/:id", getUserById);
 UserRouter.get("/users", getUsersList);
 UserRouter.put("/user/:id", validateSchema(EditUserSchema), ValidateToken, putUserById);
 UserRouter.delete("/user/:id", ValidateToken, deleteUserById);
+UserRouter.get("/user/me", ValidateToken, );

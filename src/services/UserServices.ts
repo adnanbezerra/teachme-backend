@@ -62,6 +62,13 @@ async function editUser(idFromRequest: number, userId: number, newInfo: EditInfo
     await userRepository.editUserById(idFromRequest, newInfo);
 }
 
+async function getUserMe(userId: number) {
+    const user = await userRepository.getUserMe(userId);
+    if(!user) throw notFoundError();
+
+    return user;
+}
+
 // auxiliary functions
 
 async function checkNewEmailAvailability(newLogin: INewUser) {
@@ -92,5 +99,6 @@ export {
     getUserById,
     getUsersList,
     deleteUser,
-    editUser
+    editUser,
+    getUserMe
 };
