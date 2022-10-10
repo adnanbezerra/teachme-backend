@@ -3,7 +3,7 @@ import * as postsService from "../services/PostsServices"
 import { NewPost, NewPostInfo } from "../types/PostsTypes";
 
 async function createNewPost(req: Request, res: Response) {
-    const userId = +res.locals.userId;
+    const userId = +res.locals.id;
     const newPostInfo: NewPost = req.body;
 
     await postsService.createNewPost(newPostInfo, userId);
@@ -11,7 +11,7 @@ async function createNewPost(req: Request, res: Response) {
 
 async function deletePostById(req: Request, res: Response) {
     const postId = +req.params.postId;
-    const userId = +res.locals.userId;
+    const userId = +res.locals.id;
 
     await postsService.deletePostById(postId, userId);
 
@@ -49,7 +49,7 @@ async function getPostsByName(req: Request, res: Response) {
 async function editPostById(req: Request, res: Response) {
     const newInfo: NewPostInfo = req.body;
     const postId = +req.params.postId;
-    const userId = +res.locals.userId;
+    const userId = +res.locals.id;
 
     await postsService.editPostById(postId, newInfo, userId);
 
@@ -58,7 +58,7 @@ async function editPostById(req: Request, res: Response) {
 
 async function publishPost(req: Request, res: Response) {
     const postId = +req.params.postId;
-    const userId = +res.locals.userId;
+    const userId = +res.locals.id;
 
     await postsService.publishPost(postId, userId);
 
@@ -82,7 +82,7 @@ async function viewPost(req: Request, res: Response) {
 }
 
 async function getMyPosts(req: Request, res: Response) {
-    const userId = +res.locals.userId;
+    const userId = +res.locals.id;
 
     const posts = await postsService.getMyPosts(userId);
 
