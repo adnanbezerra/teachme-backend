@@ -29,20 +29,20 @@ Nota-se que, embora existam diversas plataformas desse tipo, nenhuma é exclusiv
 
 ***
 
-## :rocket: Rotas
+    ## :rocket: Rotas
 
-```yml
-POST /signup
-    - Rota para cadastrar um novo usuário
-    - headers: {}
-    - body: {
-        name: "Lorem ipsum",
-        nickname: "loremipsum",
-        email: "lorem@gmail.com",
-        profilePicture: "https://loremipsum.com" (nullable),
-        password: "loremipsum"
-    }
-```
+    ```yml
+    POST /signup
+        - Rota para cadastrar um novo usuário
+        - headers: {}
+        - body: {
+            name: "Lorem ipsum",
+            nickname: "loremipsum",
+            email: "lorem@gmail.com",
+            profilePicture: "https://loremipsum.com" (nullable),
+            password: "loremipsum"
+        }
+    ```
     
 ```yml 
 POST /signin
@@ -222,4 +222,4 @@ Agora, você pode finalmente rodar o seu servidor localmente usando esse comando
 npm start
 ```
 
-:stop_sign: Não esqueça de repetir os passos acima com o [repositório](https://github.com/luanalessa/teachme-front.git) que contem a interface da aplicação, para testar o projeto por completo.
+:stop_sign: Não esqueça de repetir os passos acima com o [repositório](https://github.com/adnanbezerra/teachme-front.git) que contem a interface da aplicação, para testar o projeto por completo.
